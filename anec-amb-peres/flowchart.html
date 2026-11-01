@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ànec amb Peres – Visual Recipe</title>
+<style>
+  @font-face { font-family: 'Fredoka'; font-weight: 500; src: url('../assets/fonts/fredoka-latin-500-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Fredoka'; font-weight: 600; src: url('../assets/fonts/fredoka-latin-600-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Fredoka'; font-weight: 700; src: url('../assets/fonts/fredoka-latin-700-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Patrick Hand'; font-weight: 400; src: url('../assets/fonts/patrick-hand-latin-400-normal.woff2') format('woff2'); }
+
+  :root {
+    --bg: #f4eddc;
+    --paper: #fbf6ea;
+    --ink: #2f2620;
+    --muted: #6a5949;
+    --accent: #b4502c;
+    --qty: #8a3b1e;
+    --duck: #9c5b2e;
+    --sofregit: #c9552f;
+    --pear: #b8921f;
+    --picada: #5f8638;
+    --equip: #6c6a64;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); }
+  .poster {
+    width: 1200px;
+    padding: 44px 40px 34px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Patrick Hand', cursive;
+    font-size: 19px;
+    line-height: 1.2;
+  }
+  b {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.86em;
+    color: var(--qty);
+    letter-spacing: 0.2px;
+  }
+
+  /* ---------- header ---------- */
+  header { text-align: center; }
+  .title-row { display: flex; align-items: center; justify-content: center; gap: 22px; }
+  .title-row svg { width: 78px; height: 78px; }
+  h1 {
+    margin: 0;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 86px;
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+  .sub { margin: 10px 0 16px; font-size: 26px; color: var(--muted); }
+  .meta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 2.5px solid var(--ink); border-radius: 999px;
+    padding: 4px 16px 4px 8px; background: var(--paper);
+    font-family: 'Fredoka', sans-serif; font-weight: 500; font-size: 18px;
+  }
+  .pill svg { width: 24px; height: 24px; }
+  .pill strong { font-weight: 600; }
+
+  /* ---------- section headings ---------- */
+  .sec { display: flex; align-items: center; gap: 16px; margin: 30px 0 16px; }
+  .sec h2 {
+    margin: 0; font-family: 'Fredoka', sans-serif; font-weight: 600;
+    font-size: 30px; letter-spacing: 2px; white-space: nowrap;
+  }
+  .sec .rule { flex: 1; border-top: 3px dashed #bcaa8e; }
+  .sec .hint { font-size: 19px; color: var(--muted); white-space: nowrap; }
+
+  /* ---------- ingredients ---------- */
+  .ing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .col { display: flex; flex-direction: column; gap: 18px; }
+  .group {
+    background: var(--paper); border: 2.5px solid var(--ink); border-radius: 18px;
+    padding: 12px 14px 8px;
+  }
+  .group.grow { flex: 1; }
+  .ghead { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+  .tag {
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 1px;
+    color: #fff; background: var(--c); border: 2px solid var(--ink); border-radius: 10px;
+    padding: 2px 10px;
+  }
+  .where { margin-left: auto; font-size: 17px; color: var(--muted); }
+  .ing { display: flex; align-items: center; gap: 12px; padding: 6px 0; border-top: 1.5px dashed #d9ccb4; }
+  .ghead + .ing { border-top: none; }
+  .ing svg { width: 54px; height: 54px; flex: none; }
+  .ing .nm { font-size: 20px; line-height: 1.1; }
+  .ing .nt { font-size: 17px; color: var(--muted); line-height: 1.12; margin-top: 1px; }
+  .equip .ing svg { width: 44px; height: 44px; }
+  .equip .ing { padding: 4px 0; }
+  .equip .nm { font-size: 18px; }
+  .prep ul { list-style: none; margin: 4px 0 4px; padding: 0; }
+  .prep li { position: relative; padding: 3px 0 3px 30px; font-size: 18px; line-height: 1.15; }
+  .prep li::before {
+    content: ''; position: absolute; left: 2px; top: 5px; width: 16px; height: 16px;
+    border: 2.5px solid var(--ink); border-radius: 4px; background: #fff;
+  }
+
+  /* ---------- method / flow ---------- */
+  .method { position: relative; }
+  .row { display: flex; align-items: stretch; }
+  .row + .row { margin-top: 84px; }
+  .gap50 { width: 50px; flex: none; }
+  .gap30 { width: 30px; flex: none; }
+  .card {
+    position: relative; z-index: 1;
+    background: var(--paper); border: 2.5px solid var(--ink); border-radius: 20px;
+    padding: 14px 16px 14px; display: flex; flex-direction: column;
+  }
+  .card-h { display: flex; align-items: flex-start; gap: 10px; }
+  .num {
+    width: 42px; height: 42px; flex: none; border-radius: 50%;
+    background: var(--accent); color: #fff; border: 2.5px solid var(--ink);
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 24px;
+    display: grid; place-items: center;
+  }
+  .card-h h3 { margin: 1px 0 0; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 24px; line-height: 1.05; }
+  .chips { display: flex; gap: 6px; margin-top: 4px; flex-wrap: wrap; }
+  .chip {
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 12.5px; letter-spacing: .8px;
+    color: #fff; background: var(--c); border-radius: 999px; padding: 1px 8px 0;
+  }
+  svg.ill { width: 100%; height: auto; display: block; margin: 8px 0 8px; overflow: visible; }
+  ul.do { list-style: none; margin: 0; padding: 0; }
+  ul.do li { position: relative; padding-left: 18px; margin: 0 0 6px; }
+  ul.do li::before {
+    content: ''; position: absolute; left: 2px; top: 8px; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--accent);
+  }
+  .tip {
+    margin-top: auto; padding: 8px 12px 8px; background: #f2e6c6;
+    border: 2px dashed #c4a466; border-radius: 12px; font-size: 17.5px; line-height: 1.15;
+  }
+  .tip::before {
+    content: 'TIP'; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 13px;
+    letter-spacing: 1px; color: #fff; background: #b8862f; border-radius: 6px;
+    padding: 1px 6px; margin-right: 6px; position: relative; top: -1px;
+  }
+  ul.do + .tip { margin-top: auto; }
+  .card ul.do { margin-bottom: 10px; }
+
+  .meanwhile {
+    position: relative; flex: 1; display: flex; gap: 16px;
+    border: 3px dashed #9d8a70; border-radius: 26px; padding: 50px 12px 12px;
+    background: rgba(255, 250, 238, 0.45);
+  }
+  .meanwhile .mw-lbl {
+    position: absolute; top: 10px; left: 0; right: 0; text-align: center;
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 19px; letter-spacing: 1px;
+  }
+  .meanwhile .mw-lbl span { font-family: 'Patrick Hand', cursive; font-weight: 400; letter-spacing: 0; color: var(--muted); font-size: 19px; }
+  .meanwhile .card { flex: 1; }
+
+  .stages { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; margin-bottom: 10px; }
+  .stage h4 {
+    margin: 0 0 4px; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 17px;
+    color: var(--accent); letter-spacing: .5px;
+  }
+  .stage ul.do { margin: 0; }
+
+  svg.flow { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+  svg.flow .ln { fill: none; stroke: var(--ink); stroke-width: 3; stroke-dasharray: 9 7; stroke-linecap: round; }
+  svg.flow text { font-family: 'Patrick Hand', cursive; font-size: 18px; fill: var(--muted); }
+
+  /* ---------- notes ---------- */
+  .notes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .note { background: var(--paper); border: 2.5px solid var(--ink); border-radius: 18px; padding: 12px 18px 8px; }
+  .note h3 { margin: 0 0 6px; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 20px; letter-spacing: 1px; }
+  .credit { margin-top: 16px; text-align: center; font-size: 16px; color: var(--muted); }
+
+  /* ---------- svg text ---------- */
+  .tx { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 14px; fill: var(--ink); }
+  .lbl { font-family: 'Patrick Hand', cursive; font-size: 16px; fill: #5a4a3d; }
+  .lblb { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 13.5px; fill: var(--qty); }
+</style>
+</head>
+<body>
+
+<!-- ===================================================================
+     Shared illustrations (symbols are drawn once and reused below)
+     =================================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <marker id="ah" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+    <path d="M1 1 L11 6 L1 11 Z" fill="#2f2620"/>
+  </marker>
+
+  <clipPath id="cp-br"><path d="M8 54 C8 33 37 23 62 27 C83 30 94 41 92 56 C90 72 65 80 42 76 C21 73 8 68 8 54Z"/></clipPath>
+
+  <!-- clock / flame for pills -->
+  <symbol id="s-clock" viewBox="0 0 30 30">
+    <g stroke="#2f2620" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="12" y="2" width="6" height="4" rx="1" fill="#2f2620"/>
+      <circle cx="15" cy="17" r="10.5" fill="#fffaf0"/>
+      <path d="M15 17 V11 M15 17 L19.5 19.5" fill="none"/>
+    </g>
+  </symbol>
+  <symbol id="s-flame" viewBox="0 0 40 50">
+    <path d="M20 3 C28 15 36 23 36 33 C36 43 28 48 20 48 C12 48 4 43 4 33 C4 23 12 15 20 3Z" fill="#f2a23a" stroke="#2f2620" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M20 22 C24 28 28 32 28 38 C28 43 24 45 20 45 C16 45 12 43 12 38 C12 32 16 28 20 22Z" fill="#f8d66a"/>
+  </symbol>
+
+  <!-- pear (peeled) -->
+  <symbol id="s-pear" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M50 16 C41 16 39 29 39 36 C39 45 24 52 24 70 C24 87 36 95 50 95 C64 95 76 87 76 70 C76 52 61 45 61 36 C61 29 59 16 50 16Z" style="fill:var(--pf,#f2e3a6)"/>
+      <path d="M65 56 C73 64 73 80 63 88 C68 77 68 66 65 56Z" style="fill:var(--ps,#dcc679)" stroke="none"/>
+      <ellipse cx="37" cy="70" rx="4" ry="10" fill="#fffbea" stroke="none" opacity=".75"/>
+      <path d="M50 16 Q51 8 57 4" fill="none" stroke-width="4"/>
+    </g>
+  </symbol>
+  <!-- pear (whole, with skin) -->
+  <symbol id="s-pear-raw" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M54 12 C60 3 72 3 77 9 C70 15 60 15 54 12Z" fill="#7d9a4a"/>
+      <path d="M50 16 C41 16 39 29 39 36 C39 45 24 52 24 70 C24 87 36 95 50 95 C64 95 76 87 76 70 C76 52 61 45 61 36 C61 29 59 16 50 16Z" fill="#cdbf48"/>
+      <ellipse cx="62" cy="74" rx="9" ry="12" fill="#d98f4a" stroke="none" opacity=".45"/>
+      <path d="M65 56 C73 64 73 80 63 88 C68 77 68 66 65 56Z" fill="#ad9f30" stroke="none"/>
+      <ellipse cx="37" cy="70" rx="4" ry="10" fill="#f0ea9e" stroke="none"/>
+      <g fill="#7e7426" stroke="none"><circle cx="46" cy="60" r="1.3"/><circle cx="56" cy="82" r="1.3"/><circle cx="44" cy="84" r="1.3"/><circle cx="54" cy="44" r="1.2"/></g>
+      <path d="M50 16 Q51 8 55 4" fill="none" stroke-width="4"/>
+    </g>
+  </symbol>
+
+  <!-- duck pieces (colour set with --meat / --hi / --score) -->
+  <symbol id="s-leg" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M44 60 L20 84" stroke-width="14"/>
+      <circle cx="14" cy="82" r="7" fill="#f5ecd6"/>
+      <circle cx="21" cy="90" r="7" fill="#f5ecd6"/>
+      <path d="M44 60 L19 85" stroke="#f5ecd6" stroke-width="7.5"/>
+      <path d="M60 8 C83 10 96 36 86 58 C78 74 58 77 48 68 C45 66 42 64 39 62 L37 58 C28 42 34 8 60 8Z" style="fill:var(--meat,#b9722f)"/>
+      <path d="M64 19 C76 22 84 34 82 47" fill="none" style="stroke:var(--hi,#dba15e)" stroke-width="5"/>
+    </g>
+  </symbol>
+  <symbol id="s-breast" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M8 54 C8 33 37 23 62 27 C83 30 94 41 92 56 C90 72 65 80 42 76 C21 73 8 68 8 54Z" style="fill:var(--meat,#b9722f)"/>
+      <g clip-path="url(#cp-br)" fill="none" stroke-width="2.5" style="stroke:var(--score,#8a4e22)">
+        <path d="M22 34 L58 80 M38 26 L76 76 M56 24 L94 68 M20 70 L56 24 M36 80 L76 28 M58 80 L94 40"/>
+      </g>
+      <path d="M8 54 C8 33 37 23 62 27 C83 30 94 41 92 56 C90 72 65 80 42 76 C21 73 8 68 8 54Z" fill="none"/>
+    </g>
+  </symbol>
+  <symbol id="s-wing" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M8 60 C8 42 26 32 44 37 L74 22 C85 17 93 28 85 36 L62 51 C60 66 44 76 28 74 C15 72 8 68 8 60Z" style="fill:var(--meat,#b9722f)"/>
+      <path d="M28 52 C36 47 46 49 50 56" fill="none"/>
+    </g>
+  </symbol>
+  <symbol id="s-duck" viewBox="0 0 100 100">
+    <g style="--meat:#e3b195;--hi:#f3d2bf"><use href="#s-leg" x="44" y="10" width="50" height="50" transform="rotate(180 69 35)"/></g>
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M4 66 C4 46 22 36 44 36 C64 36 82 46 84 62 C86 78 68 88 44 88 C22 88 4 80 4 66Z" fill="#ecc0a3"/>
+      <path d="M14 64 C20 54 32 52 40 58" fill="none"/>
+      <path d="M22 78 C30 82 40 83 48 81" fill="none" stroke="#f7dccb" stroke-width="4"/>
+    </g>
+    <g style="--meat:#ecc0a3;--hi:#f7dccb"><use href="#s-leg" x="40" y="26" width="58" height="58" transform="rotate(180 69 55)"/></g>
+  </symbol>
+
+  <!-- seasonings -->
+  <symbol id="s-salt" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M20 56 C24 36 38 26 50 26 C62 26 76 36 80 56Z" fill="#fdfbf5"/>
+      <g fill="#d2c8b4" stroke="none"><circle cx="40" cy="42" r="2"/><circle cx="56" cy="36" r="2"/><circle cx="63" cy="47" r="2"/><circle cx="47" cy="50" r="2"/></g>
+      <path d="M8 54 L92 54 C90 76 72 88 50 88 C28 88 10 76 8 54Z" fill="#a86a3c"/>
+      <path d="M20 64 C24 72 30 77 38 79" fill="none" stroke="#c98a56" stroke-width="4"/>
+    </g>
+  </symbol>
+  <symbol id="s-pepper" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <circle cx="50" cy="12" r="6" fill="#5c3520"/>
+      <rect x="40" y="16" width="20" height="10" rx="3" fill="#5c3520"/>
+      <path d="M38 26 L62 26 L64 42 C70 50 70 62 64 72 L66 90 L34 90 L36 72 C30 62 30 50 36 42Z" fill="#7b4a2a"/>
+      <path d="M35 72 L65 72" fill="none"/>
+      <path d="M43 46 C41 54 41 62 43 67" fill="none" stroke="#a0683e" stroke-width="4"/>
+      <g fill="#3a2e28" stroke="none"><circle cx="20" cy="86" r="4"/><circle cx="78" cy="84" r="4"/><circle cx="86" cy="90" r="3.5"/></g>
+    </g>
+  </symbol>
+  <symbol id="s-oil" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="44" y="12" width="12" height="20" fill="#dfe6cf"/>
+      <rect x="42" y="4" width="16" height="10" rx="2" fill="#b07a4a"/>
+      <path d="M34 44 C34 36 44 34 44 30 L56 30 C56 34 66 36 66 44 L66 90 C66 94 63 96 59 96 L41 96 C37 96 34 94 34 90Z" fill="#cdbb4e"/>
+      <rect x="38" y="58" width="24" height="22" rx="3" fill="#f6efd8" stroke-width="2.5"/>
+      <ellipse cx="50" cy="69" rx="5" ry="3.5" fill="#6f8a3a" stroke-width="2"/>
+      <path d="M39 46 L39 54" stroke="#e8dc8a" stroke-width="3"/>
+    </g>
+  </symbol>
+
+  <!-- sofregit -->
+  <symbol id="s-onion" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M50 10 C52 20 58 26 68 32 C84 42 88 62 78 76 C70 88 30 88 22 76 C12 62 16 42 32 32 C42 26 48 20 50 10Z" fill="#d9a456"/>
+      <path d="M50 22 C40 36 36 58 42 84 M50 22 C60 36 64 58 58 84" fill="none" stroke="#a46a2c" stroke-width="2.5"/>
+      <path d="M44 88 L42 95 M50 88 L50 96 M56 88 L58 95" fill="none" stroke-width="2.5"/>
+      <path d="M50 10 L52 4" fill="none"/>
+      <g fill="#f6eed6" stroke-width="2"><rect x="80" y="82" width="9" height="9" rx="1.5"/><rect x="88" y="72" width="8" height="8" rx="1.5"/><rect x="6" y="84" width="8" height="8" rx="1.5"/></g>
+    </g>
+  </symbol>
+  <symbol id="s-garlic" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M50 14 C52 24 58 28 66 32 C82 40 86 60 76 74 C68 86 32 86 24 74 C14 60 18 40 34 32 C42 28 48 24 50 14Z" fill="#f7f1e3"/>
+      <path d="M50 28 C40 40 38 60 44 84 M50 28 C60 40 62 60 56 84" fill="none" stroke="#c8b99c" stroke-width="2.5"/>
+      <path d="M28 70 C33 78 41 82 49 83" fill="none" stroke="#c99ab0" stroke-width="3"/>
+      <path d="M50 14 L50 6" fill="none"/>
+    </g>
+  </symbol>
+  <symbol id="s-clove" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M30 84 C18 58 30 30 52 14 C60 30 70 52 66 84 C55 91 41 91 30 84Z" fill="#f7f1e3"/>
+      <path d="M52 16 C48 40 48 62 52 86" fill="none" stroke="#c8b99c" stroke-width="2.5"/>
+    </g>
+  </symbol>
+  <symbol id="s-tomato" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M50 24 C74 24 88 40 88 58 C88 78 70 90 50 90 C30 90 12 78 12 58 C12 40 26 24 50 24Z" fill="#d9493a"/>
+      <ellipse cx="32" cy="50" rx="6" ry="9" fill="#ef8a72" stroke="none"/>
+      <path d="M50 28 L38 18 L46 26 L32 28 L46 31 L42 40 L50 32 L58 40 L54 31 L68 28 L54 26 L62 18Z" fill="#6f9a46" stroke-width="2.5"/>
+      <path d="M50 27 L50 15" fill="none" stroke-width="4"/>
+    </g>
+  </symbol>
+  <symbol id="s-bottle" viewBox="0 0 60 110">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="24" y="10" width="12" height="26" fill="#6b2f15"/>
+      <rect x="23" y="4" width="14" height="12" rx="2" fill="#2f2620"/>
+      <path d="M12 48 C12 40 24 38 24 36 L36 36 C36 38 48 40 48 48 L48 100 C48 104 46 106 42 106 L18 106 C14 106 12 104 12 100Z" fill="#7a3a1a"/>
+      <rect x="16" y="62" width="28" height="24" rx="2" fill="#efe1c0" stroke-width="2.5"/>
+      <path d="M17 50 L17 56" stroke="#b0704a" stroke-width="3"/>
+    </g>
+  </symbol>
+  <symbol id="s-viranci" viewBox="0 0 100 100">
+    <use href="#s-bottle" x="4" y="2" width="56" height="96"/>
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M60 58 L90 58 L86 94 L64 94Z" fill="#fbf6ea"/>
+      <path d="M62 72 L88 72 L86 92 L64 92Z" fill="#c07a2c" stroke="none"/>
+      <path d="M60 58 L90 58 L86 94 L64 94Z" fill="none"/>
+    </g>
+  </symbol>
+  <symbol id="s-jug" viewBox="0 0 100 100">
+    <g fill="none" stroke="#9a8b7c" stroke-width="3" stroke-linecap="round" style="opacity:var(--steam,1)">
+      <path d="M40 22 C34 16 46 12 40 4"/><path d="M56 22 C50 16 62 12 56 4"/>
+    </g>
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M70 42 C88 42 90 74 72 80" fill="none" stroke-width="6"/>
+      <path d="M24 28 L14 24 L22 38" fill="#fbf8f1"/>
+      <path d="M24 28 L72 28 L68 40 C74 54 76 72 72 92 L28 92 C24 72 24 54 30 40Z" fill="#fbf8f1"/>
+      <path d="M28 52 L70 52 C72 66 72 80 71 90 L29 90 C27 80 27 66 28 52Z" style="fill:var(--liq,#d9a556)" stroke="none"/>
+      <path d="M28 52 L70 52" fill="none" stroke-width="2.5"/>
+      <path d="M24 28 L72 28 L68 40 C74 54 76 72 72 92 L28 92 C24 72 24 54 30 40Z" fill="none"/>
+    </g>
+  </symbol>
+  <symbol id="s-bay" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M10 72 C20 42 50 22 88 18 C80 52 52 76 10 72Z" fill="#7f9a4c"/>
+      <path d="M13 70 C36 56 60 38 85 21" fill="none" stroke="#56722f" stroke-width="2.5"/>
+    </g>
+  </symbol>
+  <symbol id="s-thyme" viewBox="0 0 100 100">
+    <path d="M50 96 C48 70 50 40 56 6" fill="none" stroke="#6b5a3a" stroke-width="3.5" stroke-linecap="round"/>
+    <g fill="#7aa04f" stroke="#2f2620" stroke-width="2">
+      <ellipse cx="42" cy="82" rx="7" ry="4" transform="rotate(-30 42 82)"/>
+      <ellipse cx="57" cy="74" rx="7" ry="4" transform="rotate(30 57 74)"/>
+      <ellipse cx="42" cy="64" rx="7" ry="4" transform="rotate(-30 42 64)"/>
+      <ellipse cx="59" cy="56" rx="7" ry="4" transform="rotate(30 59 56)"/>
+      <ellipse cx="45" cy="46" rx="7" ry="4" transform="rotate(-30 45 46)"/>
+      <ellipse cx="61" cy="38" rx="7" ry="4" transform="rotate(30 61 38)"/>
+      <ellipse cx="49" cy="28" rx="6" ry="3.5" transform="rotate(-30 49 28)"/>
+      <ellipse cx="62" cy="20" rx="6" ry="3.5" transform="rotate(30 62 20)"/>
+      <ellipse cx="56" cy="9" rx="5" ry="3" transform="rotate(-10 56 9)"/>
+    </g>
+  </symbol>
+  <symbol id="s-cinnamon" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="6" y="38" width="80" height="24" rx="7" fill="#9a5426"/>
+      <path d="M16 45 L70 45 M20 55 L76 55" fill="none" stroke="#6e3816" stroke-width="2.5"/>
+      <ellipse cx="85" cy="50" rx="8" ry="12" fill="#c27a42"/>
+      <path d="M85 44 C80 46 80 54 85 56 C89 55 89 49 85 49" fill="none" stroke="#6e3816" stroke-width="2.5"/>
+    </g>
+  </symbol>
+  <symbol id="s-aromatics" viewBox="0 0 100 100">
+    <use href="#s-bay" x="-8" y="16" width="76" height="76"/>
+    <use href="#s-thyme" x="38" y="-6" width="62" height="84"/>
+    <use href="#s-cinnamon" x="22" y="50" width="80" height="54"/>
+  </symbol>
+
+  <!-- pears / poaching -->
+  <symbol id="s-lemon" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M10 48 C14 30 30 22 50 22 C70 22 86 30 90 48 C86 66 70 74 50 74 C30 74 14 66 10 48Z" fill="#f2d23c"/>
+      <path d="M10 48 L4 48 M90 48 L96 48" fill="none" stroke-width="4"/>
+      <path d="M30 36 C38 31 48 30 56 31" fill="none" stroke="#faea9a" stroke-width="4"/>
+      <path d="M74 78 C78 84 80 88 80 91 C80 95 77 97 74 97 C71 97 68 95 68 91 C68 88 70 84 74 78Z" fill="#f6e48a" stroke-width="2.5"/>
+    </g>
+  </symbol>
+
+  <!-- picada -->
+  <symbol id="s-almond" viewBox="26 4 48 92">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M50 8 C64 22 72 44 70 64 C68 82 60 92 50 92 C40 92 32 82 30 64 C28 44 36 22 50 8Z" style="fill:var(--alm,#dcb174)"/>
+      <path d="M50 22 C46 42 46 64 50 84" fill="none" stroke="#b07c40" stroke-width="2.5"/>
+    </g>
+  </symbol>
+  <symbol id="s-almonds" viewBox="0 0 100 100">
+    <use href="#s-almond" x="12" y="16" width="30" height="58" transform="rotate(-30 27 45)"/>
+    <use href="#s-almond" x="40" y="6" width="30" height="58" transform="rotate(12 55 35)"/>
+    <use href="#s-almond" x="58" y="36" width="30" height="58" transform="rotate(48 73 65)"/>
+    <use href="#s-almond" x="28" y="40" width="30" height="58" transform="rotate(-6 43 69)"/>
+  </symbol>
+  <symbol id="s-bread" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M12 46 C8 24 28 12 50 12 C72 12 92 24 88 46 L86 84 C86 87 84 89 81 89 L19 89 C16 89 14 87 14 84Z" fill="#a8652f"/>
+      <path d="M22 46 C20 30 34 22 50 22 C66 22 80 30 78 46 L77 80 L23 80Z" fill="#e8c27c" stroke="none"/>
+      <g fill="#d1a057" stroke="none"><ellipse cx="36" cy="44" rx="4" ry="3"/><ellipse cx="58" cy="38" rx="3" ry="2.5"/><ellipse cx="48" cy="60" rx="5" ry="3.5"/><ellipse cx="66" cy="62" rx="3.5" ry="2.5"/><ellipse cx="34" cy="68" rx="3" ry="2"/></g>
+    </g>
+  </symbol>
+  <symbol id="s-pleaf" viewBox="0 0 40 40">
+    <path d="M20 37 C14 35 8 31 8 25 C3 23 3 15 9 13 C9 7 16 5 20 9 C24 5 31 7 31 13 C37 15 37 23 32 25 C32 31 26 35 20 37Z" fill="#6f9a46" stroke="#2f2620" stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M20 35 L20 13 M20 25 L13 17 M20 25 L27 17" fill="none" stroke="#4b6e2c" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="s-parsley" viewBox="0 0 100 100">
+    <path d="M50 96 C50 80 50 64 50 46 M50 96 C46 80 36 62 28 52 M50 96 C54 80 64 62 72 52" fill="none" stroke="#4f7a2c" stroke-width="3.5" stroke-linecap="round"/>
+    <use href="#s-pleaf" x="6" y="22" width="42" height="42"/>
+    <use href="#s-pleaf" x="52" y="22" width="42" height="42"/>
+    <use href="#s-pleaf" x="29" y="2" width="42" height="42"/>
+  </symbol>
+
+  <!-- tools -->
+  <symbol id="s-therm" viewBox="0 0 100 100">
+    <g stroke-linecap="round">
+      <path d="M58 40 L16 90" stroke="#2f2620" stroke-width="10"/>
+      <path d="M58 40 L16 90" stroke="#c4cbd0" stroke-width="4.5"/>
+      <circle cx="68" cy="28" r="20" fill="#f4f1ea" stroke="#2f2620" stroke-width="3.5"/>
+      <circle cx="68" cy="28" r="13" fill="none" stroke="#c9c2b4" stroke-width="2"/>
+      <path d="M68 28 L79 19" stroke="#c4452f" stroke-width="3.5"/>
+      <circle cx="68" cy="28" r="3" fill="#2f2620"/>
+    </g>
+  </symbol>
+  <symbol id="s-skewer" viewBox="0 0 100 100">
+    <g stroke-linecap="round">
+      <path d="M12 88 L80 20" stroke="#2f2620" stroke-width="7"/>
+      <path d="M12 88 L80 20" stroke="#c4cbd0" stroke-width="3"/>
+      <circle cx="86" cy="14" r="8" fill="none" stroke="#2f2620" stroke-width="3.5"/>
+    </g>
+  </symbol>
+  <symbol id="s-mortar" viewBox="0 0 100 100">
+    <g stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M36 89 L34 97 L66 97 L64 89Z" style="fill:var(--mortar,#e6d6b2)"/>
+      <ellipse cx="50" cy="48" rx="40" ry="11" style="fill:var(--mortar,#e6d6b2)"/>
+      <ellipse cx="50" cy="49" rx="33" ry="7.5" fill="#4a3a2e"/>
+      <ellipse cx="50" cy="51" rx="29" ry="5.5" style="fill:var(--paste,#4a3a2e)" stroke="none"/>
+      <path d="M56 50 L82 8" stroke-width="15"/>
+      <path d="M56 50 L82 8" stroke="#9a6a3c" stroke-width="8.5"/>
+      <path d="M10 48 A40 11 0 0 0 90 48 C88 72 72 90 50 90 C28 90 12 72 10 48Z" style="fill:var(--mortar,#e6d6b2)"/>
+      <path d="M14 62 C30 72 70 72 86 62" fill="none" stroke="#c9a23e" stroke-width="4"/>
+      <path d="M18 72 C32 80 68 80 82 72" fill="none" stroke="#6f8c4a" stroke-width="3"/>
+    </g>
+  </symbol>
+  <symbol id="s-spoon" viewBox="0 0 100 100">
+    <g stroke-linecap="round">
+      <path d="M44 56 L88 12" stroke="#2f2620" stroke-width="10"/>
+      <path d="M44 56 L88 12" stroke="#c08a52" stroke-width="5"/>
+      <ellipse cx="32" cy="68" rx="21" ry="14" transform="rotate(-45 32 68)" style="fill:var(--bowl,#c08a52)" stroke="#2f2620" stroke-width="3.5"/>
+    </g>
+  </symbol>
+  <symbol id="s-ladle" viewBox="0 0 100 100">
+    <g stroke-linecap="round" stroke-linejoin="round">
+      <path d="M58 32 L92 8" stroke="#2f2620" stroke-width="8"/>
+      <path d="M58 32 L92 8" stroke="#b7c0c3" stroke-width="3.5"/>
+      <path d="M16 32 L66 32 C66 50 54 62 41 62 C28 62 16 50 16 32Z" fill="#b7c0c3" stroke="#2f2620" stroke-width="3.5"/>
+      <ellipse cx="41" cy="32" rx="25" ry="6" fill="#8a4420" stroke="#2f2620" stroke-width="3"/>
+    </g>
+  </symbol>
+  <symbol id="s-casserole" viewBox="0 0 220 140">
+    <g stroke="#2f2620" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="0" y="66" width="26" height="15" rx="7" fill="#58743f"/>
+      <rect x="194" y="66" width="26" height="15" rx="7" fill="#58743f"/>
+      <path d="M18 58 L18 104 Q18 128 48 128 L172 128 Q202 128 202 104 L202 58Z" fill="#58743f"/>
+      <path d="M30 76 L30 108" stroke="#7b9a5e" stroke-width="6"/>
+      <path d="M14 58 C22 22 198 22 206 58 A96 22 0 0 1 14 58Z" fill="#6f8c52"/>
+      <path d="M40 46 C70 34 110 32 140 36" fill="none" stroke="#8fae70" stroke-width="5"/>
+      <rect x="94" y="16" width="32" height="13" rx="6" fill="#4d6638"/>
+    </g>
+  </symbol>
+  <symbol id="s-saucepan" viewBox="0 0 180 120">
+    <g stroke="#2f2620" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M126 48 L176 40 L178 52 L128 60Z" fill="#3a3330"/>
+      <ellipse cx="70" cy="44" rx="58" ry="14" fill="#b7c0c3"/>
+      <ellipse cx="70" cy="45" rx="51" ry="10" fill="#4a4440"/>
+      <path d="M12 44 A58 14 0 0 0 128 44 L128 92 Q128 110 108 110 L32 110 Q12 110 12 92Z" fill="#9aa4a8"/>
+      <path d="M24 64 L24 98" stroke="#c9d0d3" stroke-width="6"/>
+    </g>
+  </symbol>
+
+  <!-- casserole pieces for scenes: draw pot-back, then the contents, then pot-front -->
+  <g id="pot-back" stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="0" y="62" width="26" height="15" rx="7" fill="#58743f"/>
+    <rect x="194" y="62" width="26" height="15" rx="7" fill="#58743f"/>
+    <ellipse cx="110" cy="54" rx="92" ry="22" fill="#6f8c52"/>
+    <ellipse cx="110" cy="56" rx="84" ry="17" fill="#2a221d"/>
+  </g>
+  <g id="pot-front" stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M18 54 A92 22 0 0 0 202 54 L202 100 Q202 124 172 124 L48 124 Q18 124 18 100Z" fill="#58743f"/>
+    <path d="M18 54 A92 22 0 0 0 202 54 L194 56 A84 17 0 0 1 26 56Z" fill="#6f8c52"/>
+    <path d="M32 86 L32 108" stroke="#7b9a5e" stroke-width="6"/>
+  </g>
+  <g id="pan-back" stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M126 46 L176 38 L178 50 L128 58Z" fill="#3a3330"/>
+    <ellipse cx="70" cy="42" rx="58" ry="14" fill="#b7c0c3"/>
+    <ellipse cx="70" cy="43" rx="51" ry="10" fill="#4a4440"/>
+  </g>
+  <g id="pan-front" stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M12 42 A58 14 0 0 0 128 42 L128 88 Q128 104 108 104 L32 104 Q12 104 12 88Z" fill="#9aa4a8"/>
+    <path d="M12 42 A58 14 0 0 0 128 42 L121 43 A51 10 0 0 1 19 43Z" fill="#b7c0c3"/>
+    <path d="M24 60 L24 94" stroke="#c9d0d3" stroke-width="6"/>
+  </g>
+</defs>
+</svg>
+
+<div class="poster">
+
+  <!-- ===================== HEADER ===================== -->
+  <header>
+    <div class="title-row">
+      <svg viewBox="0 0 100 100"><use href="#s-pear-raw"/></svg>
+      <h1>ÀNEC AMB PERES</h1>
+      <svg viewBox="0 0 100 100"><use href="#s-duck"/></svg>
+    </div>
+    <p class="sub">Catalan duck braised with firm autumn pears, a dark sofregit and an almond–garlic picada</p>
+    <div class="meta">
+      <span class="pill"><svg viewBox="0 0 30 30"><use href="#s-clock"/></svg>Prep <strong>35 min</strong></span>
+      <span class="pill"><svg viewBox="0 0 40 50"><use href="#s-flame"/></svg>Cook <strong>2 h 35 min</strong></span>
+      <span class="pill"><svg viewBox="0 0 30 30"><use href="#s-clock"/></svg>Total <strong>3 h 25 min</strong></span>
+      <span class="pill"><svg viewBox="0 0 100 100"><use href="#s-pear"/></svg>Serves <strong>6</strong></span>
+    </div>
+  </header>
+
+  <!-- ===================== INGREDIENTS ===================== -->
+  <div class="sec"><h2>WHAT YOU NEED</h2><div class="rule"></div><span class="hint">colour tags show which steps use each group</span></div>
+
+  <div class="ing-grid">
+    <!-- column 1 -->
+    <div class="col">
+      <div class="group" style="--c:var(--duck)">
+        <div class="ghead"><span class="tag">THE DUCK</span><span class="where">→ steps 1, 2</span></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-duck"/></svg><div><div class="nm"><b>1</b> whole duck <span style="color:var(--muted)">(about 2.2 kg)</span></div><div class="nt">cut into 8 pieces, excess fat trimmed</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-salt"/></svg><div><div class="nm"><b>14 g</b> fine sea salt</div><div class="nt">12 g for the duck + 2 g to finish the sauce</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-pepper"/></svg><div><div class="nm"><b>2 g</b> freshly ground black pepper</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-oil"/></svg><div><div class="nm"><b>15 ml</b> olive oil</div><div class="nt">optional – only if the pan runs dry</div></div></div>
+      </div>
+      <div class="group" style="--c:var(--pear)">
+        <div class="ghead"><span class="tag">PEARS</span><span class="where">→ step 5</span></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-pear-raw"/></svg><div><div class="nm"><b>6</b> small firm pears <span style="color:var(--muted)">(about 900 g)</span></div><div class="nt">peeled, cored from the base, stems left on</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100" style="--liq:#a9d0e4;--steam:0"><use href="#s-jug"/></svg><div><div class="nm"><b>1.25 L</b> water</div><div class="nt">for poaching</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-lemon"/></svg><div><div class="nm"><b>15 ml</b> lemon juice</div></div></div>
+      </div>
+    </div>
+
+    <!-- column 2 -->
+    <div class="col">
+      <div class="group" style="--c:var(--sofregit)">
+        <div class="ghead"><span class="tag">SOFREGIT &amp; BRAISE</span><span class="where">→ steps 3, 4</span></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-onion"/></svg><div><div class="nm"><b>400 g</b> yellow onions</div><div class="nt">finely chopped</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-garlic"/></svg><div><div class="nm"><b>2</b> garlic cloves</div><div class="nt">sliced (of 4 total – 2 more go in the picada)</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-tomato"/></svg><div><div class="nm"><b>250 g</b> ripe tomatoes</div><div class="nt">grated, skins discarded</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-viranci"/></svg><div><div class="nm"><b>100 ml</b> vi ranci</div><div class="nt">or 75 ml dry oloroso sherry + 25 ml water</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-jug"/></svg><div><div class="nm"><b>750 ml</b> unsalted chicken or duck stock</div><div class="nt">kept hot</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-aromatics"/></svg><div><div class="nm"><b>1</b> bay leaf · <b>2</b> small thyme sprigs · <b>1</b> cinnamon stick <span style="color:var(--muted)">(4 cm)</span></div></div></div>
+      </div>
+      <div class="group prep grow" style="--c:#7a6a58">
+        <div class="ghead"><span class="tag">PREP LIST</span><span class="where">do it while the duck rests (step 1)</span></div>
+        <ul>
+          <li>Finely chop the onions</li>
+          <li>Slice 2 garlic cloves; peel the other 2 for the picada</li>
+          <li>Grate the tomatoes and discard the skins</li>
+          <li>Peel the pears and core them from the base, stems on</li>
+          <li>Heat the stock and keep it hot</li>
+          <li>Toast the almonds and bread (can be done 2 days ahead)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- column 3 -->
+    <div class="col">
+      <div class="group" style="--c:var(--picada)">
+        <div class="ghead"><span class="tag">PICADA</span><span class="where">→ step 6</span></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-almonds"/></svg><div><div class="nm"><b>40 g</b> blanched almonds</div><div class="nt">toasted</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-bread"/></svg><div><div class="nm"><b>20 g</b> day-old country bread</div><div class="nt">toasted</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-clove" x="-14" y="6" width="80" height="80"/><use href="#s-clove" x="30" y="10" width="76" height="76" transform="rotate(14 68 48)"/></svg><div><div class="nm"><b>2</b> garlic cloves</div><div class="nt">peeled</div></div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-parsley"/></svg><div><div class="nm"><b>10 g</b> flat-leaf parsley leaves</div></div></div>
+      </div>
+      <div class="group equip grow" style="--c:var(--equip)">
+        <div class="ghead"><span class="tag">EQUIPMENT</span></div>
+        <div class="ing"><svg viewBox="0 0 220 140"><use href="#s-casserole"/></svg><div class="nm">Wide heavy flameproof casserole with lid, 30–32 cm</div></div>
+        <div class="ing"><svg viewBox="0 0 180 120"><use href="#s-saucepan"/></svg><div class="nm">Heavy saucepan, about 3 L</div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-mortar"/></svg><div class="nm">Mortar &amp; pestle (or small food processor)</div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-skewer"/></svg><div class="nm">Fine skewer or paring knife</div></div>
+        <div class="ing"><svg viewBox="0 0 100 100"><use href="#s-therm"/></svg><div class="nm">Instant-read thermometer</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== METHOD ===================== -->
+  <div class="sec"><h2>HOW TO MAKE IT</h2><div class="rule"></div><span class="hint">follow the arrows</span></div>
+
+  <div class="method" id="method">
+    <svg class="flow" id="flow"></svg>
+
+    <!-- ROW A : steps 1-3 -->
+    <div class="row">
+      <div class="card" id="c1" style="width:340px">
+        <div class="card-h"><div class="num">1</div><div><h3>Season the duck</h3><div class="chips"><span class="chip" style="--c:var(--duck)">DUCK</span></div></div></div>
+        <svg class="ill" viewBox="0 0 320 200">
+          <g class="tpill" data-x="160" data-y="4" data-anchor="middle" data-t="rest 30 min"></g>
+          <use href="#s-salt" x="8" y="2" width="56" height="56"/>
+          <g fill="#fdfbf5" stroke="#2f2620" stroke-width="1.2"><circle cx="62" cy="52" r="2.4"/><circle cx="70" cy="60" r="2.2"/><circle cx="64" cy="66" r="2.2"/><circle cx="76" cy="68" r="2.4"/><circle cx="72" cy="52" r="2"/></g>
+          <use href="#s-pepper" x="250" y="0" width="60" height="60" transform="rotate(28 280 30)"/>
+          <g fill="#3a2e28"><circle cx="258" cy="60" r="2"/><circle cx="252" cy="67" r="1.8"/><circle cx="263" cy="68" r="2"/></g>
+          <rect x="10" y="72" width="300" height="104" rx="14" fill="#d9ae76" stroke="#2f2620" stroke-width="3"/>
+          <path d="M24 92 C70 88 120 96 170 90 M30 162 C90 158 140 166 200 160 M206 98 C240 94 270 100 296 96" fill="none" stroke="#c4955a" stroke-width="2"/>
+          <path d="M186 80 V168" stroke="#8a6a44" stroke-width="2.5" stroke-dasharray="6 6"/>
+          <g style="--meat:#efc3a6;--hi:#f8dccb;--score:#d79a80">
+            <use href="#s-leg" x="14" y="74" width="70" height="70"/>
+            <use href="#s-leg" width="70" height="70" transform="translate(180 78) scale(-1 1)"/>
+            <use href="#s-wing" x="22" y="122" width="56" height="56"/>
+            <use href="#s-wing" width="56" height="56" transform="translate(176 122) scale(-1 1)"/>
+            <use href="#s-breast" x="190" y="74" width="58" height="54"/>
+            <use href="#s-breast" x="248" y="74" width="58" height="54"/>
+            <use href="#s-breast" x="190" y="120" width="58" height="54"/>
+            <use href="#s-breast" x="248" y="120" width="58" height="54"/>
+          </g>
+          <text class="lbl" x="98" y="196" text-anchor="middle">legs + wings</text>
+          <text class="lbl" x="248" y="196" text-anchor="middle">breasts – kept apart</text>
+        </svg>
+        <ul class="do">
+          <li>Pat the pieces dry. Trim loose flaps of fat, but leave the skin on.</li>
+          <li>Season all over with <b>12 g salt</b> and the <b>2 g pepper</b>.</li>
+          <li>Leave for <b>30 min</b> – work through the prep list meanwhile.</li>
+          <li>Keep <b>legs, wings and breasts</b> in separate piles: they go into the braise at different times.</li>
+        </ul>
+        <div class="tip">Ask the butcher to cut the duck into 8 pieces through the joints – it cooks evenly and leaves fewer small bones in the sauce.</div>
+      </div>
+
+      <div class="gap50"></div>
+
+      <div class="card" id="c2" style="width:340px">
+        <div class="card-h"><div class="num">2</div><div><h3>Render &amp; brown</h3><div class="chips"><span class="chip" style="--c:var(--duck)">DUCK</span></div></div></div>
+        <svg class="ill" viewBox="0 0 320 200">
+          <g class="tpill" data-x="4" data-y="4" data-icon="flame" data-t="medium-low"></g>
+          <g class="tpill" data-x="+" data-y="4" data-t="skin down 10–12 min"></g>
+          <g class="tpill" data-x="214" data-y="40" data-t="flip · 3 min"></g>
+          <g transform="translate(2 54) scale(.86)">
+            <use href="#pot-back"/>
+            <ellipse cx="110" cy="58" rx="82" ry="14" fill="#e3b552"/>
+            <g fill="#f7e2a0"><circle cx="50" cy="60" r="3"/><circle cx="160" cy="62" r="3"/><circle cx="118" cy="66" r="2.5"/><circle cx="80" cy="66" r="2.5"/></g>
+            <g style="--meat:#c98a45;--hi:#e4b273;--score:#9a5a26">
+              <use href="#s-leg" x="26" y="0" width="68" height="68"/>
+              <use href="#s-breast" x="86" y="16" width="58" height="56"/>
+              <use href="#s-leg" width="68" height="68" transform="translate(198 2) scale(-1 1)"/>
+            </g>
+            <use href="#pot-front"/>
+            <g fill="none" stroke="#2f2620" stroke-width="3" stroke-linecap="round">
+              <path d="M14 30 q5 -6 10 0 q5 6 10 0"/><path d="M186 26 q5 -6 10 0 q5 6 10 0"/><path d="M104 2 q5 -6 10 0 q5 6 10 0"/>
+            </g>
+          </g>
+          <g><use href="#s-flame" x="36" y="160" width="18" height="22"/><use href="#s-flame" x="68" y="160" width="18" height="22"/><use href="#s-flame" x="100" y="160" width="18" height="22"/><use href="#s-flame" x="132" y="160" width="18" height="22"/></g>
+          <rect x="16" y="182" width="164" height="8" rx="4" fill="#3b332e"/>
+          <path d="M178 104 C198 100 212 106 220 116" fill="none" stroke="#2f2620" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah)"/>
+          <g transform="translate(204 118)">
+            <rect x="0" y="0" width="112" height="56" rx="8" fill="#b9c0c4" stroke="#2f2620" stroke-width="3"/>
+            <rect x="6" y="6" width="100" height="44" rx="5" fill="#d6dbde"/>
+            <path d="M66 8 V48" stroke="#2f2620" stroke-width="2" stroke-dasharray="4 4"/>
+            <g style="--meat:#c98a45;--hi:#e4b273;--score:#9a5a26">
+              <use href="#s-leg" x="2" y="4" width="40" height="40"/>
+              <use href="#s-leg" width="40" height="40" transform="translate(66 8) scale(-1 1)"/>
+              <use href="#s-breast" x="68" y="2" width="40" height="30"/>
+              <use href="#s-breast" x="68" y="24" width="40" height="30"/>
+            </g>
+          </g>
+          <text class="lbl" x="260" y="194" text-anchor="middle">breasts kept apart</text>
+        </svg>
+        <ul class="do">
+          <li>Wide heavy casserole over <b>medium-low</b> heat.</li>
+          <li>Duck <b>skin-side down</b>, without crowding: <b>10–12 min</b>, until plenty of fat has rendered and the skin is a deep burnished gold.</li>
+          <li>Turn and brown the flesh side <b>3 min</b>. Repeat in batches – add the <b>olive oil</b> only if the pan is dry.</li>
+          <li>Move to a tray, keeping the <b>breasts apart</b>.</li>
+        </ul>
+        <div class="tip">Pour the excess fat through a fine sieve and refrigerate it (great for potatoes). Leave about <b>30 ml</b> in the pan for the sofregit.</div>
+      </div>
+
+      <div class="gap50"></div>
+
+      <div class="card" id="c3" style="width:340px">
+        <div class="card-h"><div class="num">3</div><div><h3>Build the sofregit</h3><div class="chips"><span class="chip" style="--c:var(--sofregit)">SOFREGIT</span></div></div></div>
+        <svg class="ill" viewBox="0 0 320 200">
+          <g class="tpill" data-x="4" data-y="4" data-icon="flame" data-t="low heat"></g>
+          <!-- pot 1: onions -->
+          <g transform="translate(4 66) scale(.4)">
+            <use href="#pot-back"/>
+            <ellipse cx="110" cy="58" rx="84" ry="16" fill="#c98a3a"/>
+            <g fill="#e6b867" stroke="#8f5a22" stroke-width="3"><ellipse cx="70" cy="54" rx="10" ry="5"/><ellipse cx="102" cy="62" rx="9" ry="5"/><ellipse cx="132" cy="52" rx="10" ry="5"/><ellipse cx="152" cy="62" rx="8" ry="4"/><ellipse cx="86" cy="66" rx="8" ry="4"/><ellipse cx="122" cy="68" rx="9" ry="4"/><ellipse cx="50" cy="62" rx="8" ry="4"/></g>
+            <use href="#pot-front"/>
+          </g>
+          <!-- pot 2: garlic + tomato -->
+          <g transform="translate(116 66) scale(.4)">
+            <use href="#pot-back"/>
+            <ellipse cx="110" cy="58" rx="84" ry="16" fill="#b4502b"/>
+            <ellipse cx="110" cy="58" rx="80" ry="14" fill="none" stroke="#e8a83e" stroke-width="6"/>
+            <g fill="#f4ead0" stroke="#2f2620" stroke-width="3"><ellipse cx="88" cy="56" rx="10" ry="6"/><ellipse cx="132" cy="60" rx="10" ry="6"/><ellipse cx="112" cy="50" rx="9" ry="5"/></g>
+            <use href="#pot-front"/>
+          </g>
+          <!-- pot 3: vi ranci -->
+          <g transform="translate(228 66) scale(.4)">
+            <use href="#pot-back"/>
+            <ellipse cx="110" cy="58" rx="84" ry="16" fill="#8c3d1c"/>
+            <path d="M66 52 C90 47 124 47 150 52" fill="none" stroke="#c46a3c" stroke-width="6" stroke-linecap="round"/>
+            <use href="#pot-front"/>
+          </g>
+          <path d="M277 50 C273 62 271 76 272 90" fill="none" stroke="#a35a2a" stroke-width="4" stroke-linecap="round"/>
+          <use href="#s-bottle" width="30" height="56" transform="translate(286 59) rotate(230)"/>
+          <g fill="none" stroke="#9a8b7c" stroke-width="2.5" stroke-linecap="round"><path d="M246 70 c-4 -6 4 -10 0 -16"/><path d="M300 70 c-4 -6 4 -10 0 -16"/></g>
+          <path d="M94 96 H112" fill="none" stroke="#2f2620" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+          <path d="M206 96 H224" fill="none" stroke="#2f2620" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+          <text class="lbl" text-anchor="middle"><tspan x="48" y="140">onions</tspan><tspan x="48" y="158" class="lblb">30–35 min</tspan><tspan x="48" y="176">dark gold</tspan><tspan x="48" y="193">&amp; jammy</tspan></text>
+          <text class="lbl" text-anchor="middle"><tspan x="160" y="140">+ garlic <tspan class="lblb">1 min</tspan></tspan><tspan x="160" y="158">+ tomato <tspan class="lblb">12–15 min</tspan></tspan><tspan x="160" y="176">thick rust paste,</tspan><tspan x="160" y="193">fat at the edges</tspan></text>
+          <text class="lbl" text-anchor="middle"><tspan x="272" y="140">+ vi ranci</tspan><tspan x="272" y="158">scrape the base</tspan><tspan x="272" y="176" class="lblb">reduce by ½</tspan></text>
+        </svg>
+        <ul class="do">
+          <li>Lower the heat. Cook the <b>400 g onions</b> in the duck fat for <b>30–35 min</b>, stirring often, until dark gold, soft and jammy.</li>
+          <li>Add the <b>2 sliced garlic cloves</b>; cook <b>1 min</b>.</li>
+          <li>Stir in the <b>250 g grated tomato</b>; cook <b>12–15 min</b> until reduced to a thick rust-coloured paste with the fat showing at its edges.</li>
+          <li>Pour in the <b>100 ml vi ranci</b>, scrape the casserole clean and reduce by <b>half</b>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ROW B : step 4 + (5, 6 in parallel) -->
+    <div class="row">
+      <div class="card" id="c4" style="width:420px">
+        <div class="card-h"><div class="num">4</div><div><h3>Braise the legs</h3><div class="chips"><span class="chip" style="--c:var(--duck)">DUCK</span><span class="chip" style="--c:var(--sofregit)">BRAISE</span></div></div></div>
+        <svg class="ill" viewBox="0 0 390 250">
+          <g class="tpill" data-x="4" data-y="4" data-icon="flame" data-t="quiet simmer"></g>
+          <g class="tpill" data-x="+" data-y="4" data-t="50 min"></g>
+          <g class="tpill" data-x="+" data-y="4" data-icon="none" data-t="lid slightly ajar"></g>
+          <!-- stock jug pouring -->
+          <g transform="translate(86 46) scale(-1 1)"><use href="#s-jug" width="72" height="72" style="--steam:0" transform="rotate(-28 36 36)"/></g>
+          <path d="M80 74 C96 80 116 104 128 140" fill="none" stroke="#d9a556" stroke-width="4" stroke-linecap="round"/>
+          <text class="lbl" text-anchor="middle"><tspan x="42" y="138" class="lblb">600 ml</tspan><tspan x="42" y="155">hot stock</tspan></text>
+          <!-- pot -->
+          <g transform="translate(94 96) scale(.92)">
+            <use href="#pot-back"/>
+            <ellipse cx="110" cy="58" rx="84" ry="16" fill="#8a4422"/>
+            <g style="--meat:#b8742f;--hi:#d89a55">
+              <use href="#s-leg" width="66" height="66" transform="translate(196 0) scale(-1 1)"/>
+              <use href="#s-wing" x="82" y="20" width="52" height="52"/>
+              <use href="#s-leg" x="22" y="2" width="66" height="66"/>
+            </g>
+            <path d="M26 58 Q44 46 62 54 T100 52 T138 54 T176 52 T196 58 A85 17 0 0 1 26 58Z" fill="#8a4422" stroke="#2f2620" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M40 62 C60 59 90 59 110 62" fill="none" stroke="#b5683c" stroke-width="4" stroke-linecap="round"/>
+            <use href="#s-cinnamon" x="70" y="44" width="42" height="30"/>
+            <use href="#s-bay" x="30" y="40" width="34" height="34" transform="rotate(-10 47 57)"/>
+            <use href="#s-thyme" x="100" y="36" width="26" height="40" transform="rotate(70 113 56)"/>
+            <use href="#pot-front"/>
+            <!-- lid resting ajar on the right of the rim -->
+            <g transform="translate(150 44) rotate(-8)">
+              <path d="M-66 0 C-60 -26 60 -26 66 0 A66 15 0 0 1 -66 0Z" fill="#6f8c52" stroke="#2f2620" stroke-width="3.5" stroke-linejoin="round"/>
+              <path d="M-66 0 A66 15 0 0 0 66 0" fill="none" stroke="#2f2620" stroke-width="3"/>
+              <path d="M-40 -12 C-20 -20 10 -21 30 -18" fill="none" stroke="#8fae70" stroke-width="5" stroke-linecap="round"/>
+              <rect x="-13" y="-30" width="26" height="10" rx="4" fill="#4d6638" stroke="#2f2620" stroke-width="3"/>
+            </g>
+            <g fill="none" stroke="#9a8b7c" stroke-width="3.5" stroke-linecap="round"><path d="M86 14 c-6 -8 6 -14 0 -24"/><path d="M100 10 c-6 -8 6 -14 0 -24"/></g>
+          </g>
+          <g><use href="#s-flame" x="134" y="210" width="16" height="20"/><use href="#s-flame" x="186" y="210" width="16" height="20"/><use href="#s-flame" x="238" y="210" width="16" height="20"/></g>
+          <rect x="114" y="230" width="166" height="8" rx="4" fill="#3b332e"/>
+          <!-- ½ way note -->
+          <path d="M70 206 C88 200 102 186 114 160" fill="none" stroke="#2f2620" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+          <text class="lbl" text-anchor="middle"><tspan x="40" y="212">liquid ½-way</tspan><tspan x="40" y="229">up the duck –</tspan><tspan x="40" y="246">not covering it</tspan></text>
+          <!-- breasts waiting -->
+          <g transform="translate(304 150)">
+            <rect x="0" y="0" width="82" height="46" rx="8" fill="#b9c0c4" stroke="#2f2620" stroke-width="3"/>
+            <rect x="5" y="5" width="72" height="36" rx="5" fill="#d6dbde"/>
+            <g style="--meat:#c98a45;--score:#9a5a26">
+              <use href="#s-breast" x="2" y="2" width="44" height="40"/>
+              <use href="#s-breast" x="38" y="4" width="44" height="40"/>
+            </g>
+          </g>
+          <text class="lbl" text-anchor="middle"><tspan x="345" y="216">breasts wait</tspan><tspan x="345" y="233">on the tray</tspan></text>
+        </svg>
+        <ul class="do">
+          <li>Return only the <b>legs and wings</b> to the casserole.</li>
+          <li>Add the <b>bay leaf</b>, <b>thyme</b>, <b>cinnamon</b> and <b>600 ml hot stock</b> (keep the other 150 ml hot for step 8).</li>
+          <li>The liquid should reach about <b>halfway up</b> the duck – not cover it.</li>
+          <li>Bring to a <b>quiet simmer</b>, set the lid <b>slightly ajar</b> and cook <b>50 min</b>.</li>
+          <li>Turn the pieces once, without stirring the sofregit up from the bottom.</li>
+        </ul>
+        <div class="tip">Keep it at a quiet tremble, not a boil. Start step 5 and step 6 now so the pears and picada are ready when the 50 minutes are up.</div>
+      </div>
+
+      <div class="gap30"></div>
+
+      <div class="meanwhile" id="mw">
+        <div class="mw-lbl">WHILE THE LEGS BRAISE <span>– do these two side by side</span></div>
+
+        <div class="card" id="c5">
+          <div class="card-h"><div class="num">5</div><div><h3>Poach the pears</h3><div class="chips"><span class="chip" style="--c:var(--pear)">PEARS</span></div></div></div>
+          <svg class="ill" viewBox="0 0 300 214">
+            <g class="tpill" data-x="4" data-y="4" data-icon="flame" data-t="gentle simmer"></g>
+            <g class="tpill" data-x="+" data-y="4" data-t="12–18 min"></g>
+            <g transform="translate(2 80) scale(.95)">
+              <use href="#pan-back"/>
+              <ellipse cx="70" cy="44" rx="50" ry="9" fill="#ece6c2"/>
+              <use href="#s-pear" x="14" y="-10" width="50" height="50"/>
+              <use href="#s-pear" x="45" y="-18" width="50" height="50"/>
+              <use href="#s-pear" x="76" y="-10" width="50" height="50"/>
+              <path d="M19 42 Q36 34 52 40 T86 38 T121 42 A51 10 0 0 1 19 42Z" fill="#ece6c2" opacity=".82" stroke="#2f2620" stroke-width="2"/>
+              <circle cx="38" cy="47" r="5" fill="#f2d23c" stroke="#2f2620" stroke-width="2"/>
+              <use href="#pan-front"/>
+            </g>
+            <g><use href="#s-flame" x="24" y="178" width="16" height="20"/><use href="#s-flame" x="56" y="178" width="16" height="20"/><use href="#s-flame" x="88" y="178" width="16" height="20"/></g>
+            <rect x="12" y="198" width="110" height="8" rx="4" fill="#3b332e"/>
+            <!-- skewer test inset -->
+            <g transform="translate(182 42)">
+              <rect x="0" y="0" width="116" height="168" rx="12" fill="#fffaf0" stroke="#2f2620" stroke-width="2" stroke-dasharray="5 4"/>
+              <text class="lblb" x="58" y="20" text-anchor="middle">TEST AT 12 MIN</text>
+              <use href="#s-pear" x="18" y="24" width="80" height="80"/>
+              <ellipse cx="58" cy="80" rx="8" ry="14" fill="none" stroke="#a88a3a" stroke-width="2" stroke-dasharray="4 3"/>
+              <path d="M110 34 L68 74" stroke="#2f2620" stroke-width="6" stroke-linecap="round"/>
+              <path d="M110 34 L68 74" stroke="#c4cbd0" stroke-width="2.5" stroke-linecap="round"/>
+              <text class="lbl" text-anchor="middle"><tspan x="58" y="124">skewer slides into</tspan><tspan x="58" y="141">the outer flesh,</tspan><tspan x="58" y="158">resists at the core</tspan></text>
+            </g>
+          </svg>
+          <ul class="do">
+            <li>Peeled pears + <b>1.25 L water</b> + <b>15 ml lemon juice</b> in the saucepan.</li>
+            <li>Bring <b>just to a simmer</b>; poach gently <b>12–18 min</b>, turning once.</li>
+            <li>Test at <b>12 min</b>: a fine skewer enters the outer flesh but meets <b>clear resistance</b> near the centre.</li>
+            <li>Lift out carefully and drain <b>upright</b>. They must still be firm – they finish in the duck sauce.</li>
+          </ul>
+          <div class="tip">Conference or Bosc need closer to 18 min; a small Blanquilla only 10–12. Test the fruit, not the clock.</div>
+        </div>
+
+        <div class="card" id="c6">
+          <div class="card-h"><div class="num">6</div><div><h3>Pound the picada</h3><div class="chips"><span class="chip" style="--c:var(--picada)">PICADA</span></div></div></div>
+          <svg class="ill" viewBox="0 0 300 214">
+            <g class="tpill" data-x="150" data-y="2" data-anchor="middle" data-icon="none" data-t="+ ~75 ml hot liquid from the casserole"></g>
+            <use href="#s-almonds" x="4" y="34" width="66" height="66"/>
+            <text class="lbl" x="44" y="114" text-anchor="middle"><tspan class="lblb">40 g</tspan> almonds</text>
+            <use href="#s-bread" x="8" y="126" width="60" height="60"/>
+            <text class="lbl" x="38" y="204" text-anchor="middle"><tspan class="lblb">20 g</tspan> bread</text>
+            <use href="#s-clove" x="226" y="38" width="44" height="54"/>
+            <use href="#s-clove" x="250" y="42" width="40" height="50" transform="rotate(16 270 67)"/>
+            <text class="lbl" x="262" y="114" text-anchor="middle"><tspan class="lblb">2</tspan> garlic cloves</text>
+            <use href="#s-parsley" x="230" y="124" width="62" height="62"/>
+            <text class="lbl" x="262" y="204" text-anchor="middle"><tspan class="lblb">10 g</tspan> parsley</text>
+            <use href="#s-ladle" width="58" height="58" transform="translate(178 32) rotate(-28) scale(-1 1)"/>
+            <path d="M150 62 C150 76 150 88 150 100" fill="none" stroke="#8a4420" stroke-width="4" stroke-linecap="round"/>
+            <g style="--paste:#c8a46a"><use href="#s-mortar" x="80" y="58" width="140" height="140"/></g>
+            <g fill="#6f9a46"><circle cx="138" cy="130" r="2.4"/><circle cx="160" cy="132" r="2.4"/><circle cx="148" cy="128" r="2"/></g>
+            <g fill="none" stroke="#2f2620" stroke-width="2.2" stroke-dasharray="4 4" marker-end="url(#ah)">
+              <path d="M72 76 C88 86 96 98 104 112"/><path d="M72 150 C86 146 94 140 102 134"/>
+              <path d="M226 80 C212 88 204 100 198 112"/><path d="M228 152 C214 148 206 142 198 134"/>
+            </g>
+          </svg>
+          <ul class="do">
+            <li>Pound the <b>40 g toasted almonds</b>, <b>20 g toasted bread</b>, <b>2 garlic cloves</b> and <b>10 g parsley</b> to a close, slightly coarse paste.</li>
+            <li>Work in about <b>75 ml hot liquid</b> from the casserole to loosen it.</li>
+            <li>Using a food processor? Stop before the almonds turn oily and smooth – the picada should keep a little grain.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW C : steps 7-8 -->
+    <div class="row">
+      <div class="card" id="c7" style="width:690px">
+        <div class="card-h"><div class="num">7</div><div><h3>Finish the braise</h3><div class="chips"><span class="chip" style="--c:var(--duck)">DUCK</span><span class="chip" style="--c:var(--pear)">PEARS</span><span class="chip" style="--c:var(--picada)">PICADA</span></div></div></div>
+        <svg class="ill" viewBox="0 0 656 200">
+          <!-- A: breasts in -->
+          <g class="tpill" data-x="100" data-y="4" data-anchor="middle" data-t="+ breasts · 15 min"></g>
+          <g transform="translate(6 62) scale(.86)">
+            <use href="#pot-back"/>
+            <ellipse cx="110" cy="58" rx="84" ry="16" fill="#7f3c1d"/>
+            <g style="--meat:#b8742f;--hi:#d89a55"><use href="#s-leg" x="24" y="6" width="60" height="60"/><use href="#s-leg" width="60" height="60" transform="translate(198 6) scale(-1 1)"/></g>
+            <path d="M26 58 Q44 48 62 54 T100 52 T138 54 T176 52 T196 58 A85 17 0 0 1 26 58Z" fill="#7f3c1d" stroke="#2f2620" stroke-width="2.5" stroke-linejoin="round"/>
+            <g style="--meat:#c98a45;--score:#9a5a26"><use href="#s-breast" x="60" y="10" width="62" height="56"/><use href="#s-breast" x="106" y="12" width="62" height="56"/></g>
+            <use href="#pot-front"/>
+          </g>
+          <text class="lbl" x="100" y="190" text-anchor="middle">skin-side up, gentle simmer</text>
+          <path d="M202 120 H226" fill="none" stroke="#2f2620" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+          <!-- B: picada + pears -->
+          <g class="tpill" data-x="330" data-y="4" data-anchor="middle" data-t="uncovered 15–20 min"></g>
+          <g transform="translate(234 62) scale(.86)">
+            <use href="#pot-back"/>
+            <ellipse cx="110" cy="58" rx="84" ry="16" fill="#8a4420"/>
+            <g style="--meat:#b8742f;--hi:#d89a55"><use href="#s-leg" x="20" y="8" width="56" height="56"/><use href="#s-breast" x="70" y="22" width="52" height="46"/></g>
+            <g style="--pf:#e8c672;--ps:#c99a44">
+              <use href="#s-pear" x="106" y="-14" width="52" height="52"/>
+              <use href="#s-pear" x="144" y="-6" width="50" height="50"/>
+              <use href="#s-pear" x="52" y="-6" width="48" height="48"/>
+            </g>
+            <path d="M26 58 Q44 50 62 55 T100 54 T138 55 T176 54 T196 58 A85 17 0 0 1 26 58Z" fill="#8a4420" stroke="#2f2620" stroke-width="2.5" stroke-linejoin="round"/>
+            <g fill="#d6b37a"><circle cx="60" cy="62" r="3"/><circle cx="96" cy="64" r="3"/><circle cx="140" cy="62" r="3"/><circle cx="168" cy="64" r="2.5"/><circle cx="120" cy="66" r="2.5"/></g>
+            <g fill="#6f9a46"><circle cx="78" cy="64" r="2.5"/><circle cx="152" cy="66" r="2.5"/></g>
+            <use href="#pot-front"/>
+          </g>
+          <g style="--bowl:#8a4420"><use href="#s-spoon" x="392" y="30" width="58" height="58"/></g>
+          <path d="M404 82 C402 88 400 92 398 96" fill="none" stroke="#8a4420" stroke-width="3.5" stroke-linecap="round"/>
+          <text class="lblb" x="430" y="112">×2</text>
+          <text class="lbl" x="330" y="190" text-anchor="middle">stir in picada, nestle in pears, baste</text>
+          <path d="M432 120 H456" fill="none" stroke="#2f2620" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+          <!-- C: done checks -->
+          <rect x="462" y="2" width="192" height="196" rx="14" fill="#f1f6e8" stroke="#5f8638" stroke-width="2.5"/>
+          <text class="tx" x="558" y="24" text-anchor="middle" style="fill:#4b6e2c">READY WHEN…</text>
+          <use href="#s-therm" x="470" y="36" width="46" height="46"/>
+          <text class="lbl"><tspan x="524" y="54">breast <tspan class="lblb">≥ 74 °C</tspan></tspan><tspan x="524" y="72">near the bone</tspan></text>
+          <g style="--bowl:#8a4420"><use href="#s-spoon" x="470" y="92" width="44" height="44"/></g>
+          <text class="lbl"><tspan x="524" y="110">sauce clings</tspan><tspan x="524" y="128">lightly to a spoon</tspan></text>
+          <g style="--meat:#b8742f;--hi:#d89a55"><use href="#s-leg" x="470" y="144" width="46" height="46"/></g>
+          <text class="lbl"><tspan x="524" y="164">leg joint moves</tspan><tspan x="524" y="182">easily when pressed</tspan></text>
+        </svg>
+        <div class="stages">
+          <div class="stage"><h4>A · AFTER THE 50 MIN</h4><ul class="do"><li>Add the browned <b>breasts skin-side up</b>.</li><li>Simmer gently <b>15 min</b>.</li></ul></div>
+          <div class="stage"><h4>B · PICADA + PEARS</h4><ul class="do"><li>Stir the loosened <b>picada</b> into the sauce around the duck, then nestle in the <b>pears</b>.</li><li>Cook <b>uncovered 15–20 min</b>, spooning sauce over the pears <b>twice</b>.</li></ul></div>
+          <div class="stage"><h4>C · CHECK</h4><ul class="do"><li>Sauce clings lightly to a spoon.</li><li>Breasts reach at least <b>74 °C</b> near the bone.</li><li>A leg joint moves easily when pressed.</li></ul></div>
+        </div>
+        <div class="tip">Legs still tight once the breasts are cooked? Lift out the breasts and pears, cover them, and give the legs another <b>10–15 min</b>. Duck follows tenderness, not pride.</div>
+      </div>
+
+      <div class="gap50"></div>
+
+      <div class="card" id="c8" style="width:380px">
+        <div class="card-h"><div class="num">8</div><div><h3>Rest &amp; serve</h3><div class="chips"><span class="chip" style="--c:var(--duck)">+ 2 g SALT</span><span class="chip" style="--c:var(--sofregit)">RESERVED STOCK</span></div></div></div>
+        <svg class="ill" viewBox="0 0 350 214">
+          <use href="#s-aromatics" x="4" y="8" width="66" height="66"/>
+          <path d="M14 14 L62 66 M62 14 L14 66" stroke="#b4502c" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+          <text class="lbl" text-anchor="middle"><tspan x="38" y="92">out: bay, thyme</tspan><tspan x="38" y="109">&amp; cinnamon</tspan></text>
+          <g class="tpill" data-x="98" data-y="4" data-t="rest 15 min"></g>
+          <g class="tpill" data-x="98" data-y="38" data-icon="none" data-t="skim off pools of fat"></g>
+          <g class="tpill" data-x="98" data-y="72" data-icon="none" data-t="+ 2 g salt · splash of stock if thick"></g>
+          <use href="#s-bread" x="8" y="128" width="58" height="58"/>
+          <text class="lbl" x="38" y="204" text-anchor="middle">pa de pagès</text>
+          <ellipse cx="222" cy="166" rx="120" ry="42" fill="#f7f2e6" stroke="#2f2620" stroke-width="3"/>
+          <ellipse cx="222" cy="164" rx="92" ry="30" fill="#fffdf7" stroke="#d6c9b2" stroke-width="2"/>
+          <path d="M144 168 C144 152 184 146 224 148 C270 150 300 158 296 172 C290 186 248 190 208 188 C172 186 144 182 144 168Z" fill="#8a4420" stroke="#2f2620" stroke-width="2.5"/>
+          <path d="M176 160 C198 155 228 154 250 156" fill="none" stroke="#c97a4a" stroke-width="4" stroke-linecap="round"/>
+          <g style="--meat:#a8642a;--hi:#c98a45"><use href="#s-leg" x="146" y="116" width="74" height="74"/></g>
+          <g style="--pf:#e3bd68;--ps:#c2963e"><use href="#s-pear" x="222" y="100" width="76" height="76"/></g>
+          <path d="M256 112 C254 124 250 132 252 146 M266 120 C268 130 266 140 270 150" fill="none" stroke="#8a4420" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <ul class="do">
+          <li>Remove the <b>bay leaf</b>, <b>thyme stems</b> and <b>cinnamon</b>.</li>
+          <li>Rest <b>15 min</b>, then skim away any large pools of fat.</li>
+          <li>Stir in the last <b>2 g salt</b>. Loosen with a little reserved hot stock <b>only if</b> the sauce has become too thick.</li>
+          <li>Serve <b>one pear per portion</b> of duck; spoon the glossy picada-bound sauce over both.</li>
+        </ul>
+        <div class="tip">Serve with pa de pagès for the sauce, and a medium-bodied Garnatxa or Garnatxa-Samsó red from the Empordà.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== NOTES ===================== -->
+  <div class="sec"><h2>GOOD TO KNOW</h2><div class="rule"></div></div>
+  <div class="notes">
+    <div class="note">
+      <h3>SWAPS</h3>
+      <ul class="do">
+        <li>No vi ranci: <b>75 ml dry oloroso sherry + 25 ml water</b> – nuttier, less caramel-like. Never a sweet cream sherry.</li>
+        <li>Pears should smell ripe but stay firm at the neck. Blanquilla is traditional; Conference or Bosc hold their shape better. A fully ripe Bartlett turns to purée.</li>
+        <li>No whole duck: <b>6 large duck legs</b> (1.8–2 kg). Braise about <b>75 min</b>, then add the picada and pears and finish <b>15–20 min</b>.</li>
+        <li>Use <b>unsalted</b> stock – the sauce concentrates a lot. Taste it, don't guess.</li>
+      </ul>
+    </div>
+    <div class="note">
+      <h3>MAKE AHEAD</h3>
+      <ul class="do">
+        <li>Toast the almonds and bread up to <b>2 days</b> ahead; cool and keep airtight. Make the picada on the day – raw garlic turns harsh as it sits.</li>
+        <li>Cook the duck and sauce <b>1 day</b> ahead, without the pears. Chill covered, lift off the firm fat, reheat at a bare simmer, then add fresh picada and pears for the final <b>15 min</b>.</li>
+        <li>The finished dish keeps <b>3 days</b> in the fridge. Reheat gently and turn the pears as little as possible – they soften each time.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="credit">Visual adaptation of “Ànec amb Peres” by Chef Isabel, Culinary Explorer</div>
+</div>
+
+<script>
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  // Timer / heat pills inside illustrations: <g class="tpill" data-x data-y data-t data-icon data-anchor>
+  function buildPills() {
+    document.querySelectorAll('g.tpill').forEach((g) => {
+      const icon = g.dataset.icon || 'clock';
+      const h = 28, pad = 10, iw = icon === 'none' ? 0 : 24;
+      const rect = el('rect', { x: 0, y: 0, height: h, rx: h / 2, fill: '#fff8e6', stroke: '#2f2620', 'stroke-width': 2.5 }, g);
+      if (icon === 'clock') el('use', { href: '#s-clock', x: 5, y: 2, width: 24, height: 24 }, g);
+      if (icon === 'flame') el('use', { href: '#s-flame', x: 6, y: 3, width: 20, height: 22 }, g);
+      const text = el('text', { x: pad + iw, y: 19.5, class: 'tx' }, g);
+      text.textContent = g.dataset.t;
+      const w = Math.ceil(text.getComputedTextLength() + pad * 2 + iw);
+      rect.setAttribute('width', w);
+      let x = Number(g.dataset.x), y = Number(g.dataset.y);
+      if (g.dataset.x === '+') {
+        const prev = g.previousElementSibling;
+        x = Number(prev.dataset.left) + Number(prev.dataset.w) + 8;
+      }
+      if (g.dataset.anchor === 'middle') x -= w / 2;
+      g.dataset.left = x; g.dataset.w = w;
+      g.setAttribute('transform', `translate(${x} ${y})`);
+    });
+  }
+
+  // Flow arrows between the step cards.
+  function buildFlow() {
+    const method = document.getElementById('method');
+    const svg = document.getElementById('flow');
+    const base = method.getBoundingClientRect();
+    svg.setAttribute('viewBox', `0 0 ${base.width} ${base.height}`);
+    const box = (id) => {
+      const r = document.getElementById(id).getBoundingClientRect();
+      return { l: r.left - base.left, r: r.right - base.left, t: r.top - base.top, b: r.bottom - base.top, cx: r.left - base.left + r.width / 2 };
+    };
+    const R = 16;
+    const path = (d, arrow) => el('path', Object.assign({ d, class: 'ln' }, arrow ? { 'marker-end': 'url(#ah)' } : {}), svg);
+    // vertical drop from (x1, y1) to row y=midY, across to x2 (no arrow)
+    const elbow = (x1, y1, x2, midY) => {
+      const dir = x2 > x1 ? 1 : -1;
+      return `M${x1} ${y1} V${midY - R} Q${x1} ${midY} ${x1 + dir * R} ${midY} H${x2}`;
+    };
+    const horiz = (a, b, y) => path(`M${a.r + 6} ${y} H${b.l - 6}`, true);
+
+    const c = {};
+    ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'mw'].forEach((id) => (c[id] = box(id)));
+
+    // Row A: 1 -> 2 -> 3
+    horiz(c.c1, c.c2, c.c1.t + 150);
+    horiz(c.c2, c.c3, c.c2.t + 150);
+
+    // 3 -> 4 (wraps back to the left)
+    {
+      const y1 = c.c3.b, y2 = c.c4.t, mid = (y1 + y2) / 2;
+      const x1 = c.c3.cx, x2 = c.c4.cx;
+      path(`M${x1} ${y1} V${mid - R} Q${x1} ${mid} ${x1 - R} ${mid} H${x2 + R} Q${x2} ${mid} ${x2} ${mid + R} V${y2 - 4}`, true);
+    }
+
+    // 4 -> meanwhile box
+    horiz(c.c4, c.mw, c.c4.t + 150);
+
+    // 4, 5, 6 -> 7 (merge)
+    {
+      const rowBottom = Math.max(c.c4.b, c.mw.b);
+      const mid = (rowBottom + c.c7.t) / 2 + 4;
+      const x7 = c.c7.cx;
+      path(elbow(c.c4.cx, c.c4.b, x7, mid), false);
+      path(elbow(c.c5.cx, c.c5.b, x7, mid), false);
+      path(elbow(c.c6.cx, c.c6.b, c.c5.cx, mid), false);
+      path(`M${x7} ${mid} V${c.c7.t - 4}`, true);
+      const lab = (x, txt) => { const e = el('text', { x: x + 10, y: rowBottom + 22 }, svg); e.textContent = txt; };
+      lab(c.c4.cx, 'duck, after 50 min');
+      lab(c.c5.cx, 'poached pears');
+      lab(c.c6.cx, 'loosened picada');
+    }
+
+    // Row C: 7 -> 8
+    horiz(c.c7, c.c8, c.c7.t + 150);
+  }
+
+  document.fonts.ready.then(() => {
+    buildPills();
+    buildFlow();
+    window.__posterReady = true;
+  });
+})();
+</script>
+</body>
+</html>
