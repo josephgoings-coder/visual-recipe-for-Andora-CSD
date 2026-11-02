@@ -70,7 +70,11 @@ for y, x in zip(ys, xs):
                 break
     if len(ends) == 2:
         (t1, c1), (t2, c2) = ends
-        out[y, x] = (c1 * t2 + c2 * t1) / (t1 + t2)
+        paper1, paper2 = c1.min() > 235 and np.ptp(c1) < 15, c2.min() > 235 and np.ptp(c2) < 15
+        if paper1 != paper2:   # band crosses the figure outline: keep a crisp edge, no pink blend
+            out[y, x] = c1 if t1 <= t2 else c2
+        else:
+            out[y, x] = (c1 * t2 + c2 * t1) / (t1 + t2)
 # a light blur inside the band only, to hide sampling jaggies ...
 soft = cv2.GaussianBlur(out, (3, 3), 0)
 m = lines > 0
@@ -101,6 +105,12 @@ nb, blab = cv2.connectedComponents(paper, connectivity=4)
 border = set(np.unique(np.concatenate([blab[0], blab[-1], blab[:, 0], blab[:, -1]]))) - {0}
 bgmask = np.isin(blab, list(border))
 out[bgmask] = 255
+# thin pink stubs left where a leader left the figure outline: open the figure mask inside
+# the leader zone and paint what the opening removes white
+fg = (~bgmask).astype(np.uint8)
+opened = cv2.morphologyEx(fg, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7)))
+lzone = cv2.dilate(lines, np.ones((5, 5), np.uint8)) > 0
+out[(fg > 0) & (opened == 0) & lzone] = 255
 
 cv2.imwrite(os.path.join(HERE, 'clean.png'), out)
 print('clean.png written; leader px', int(lines.sum()), 'text px', int(text.sum()))
