@@ -54,6 +54,8 @@ Sources per category in `anatomi/<kroppen|organ|muskler|skelett>/`:
 
 - `source.png`: the original English-labelled illustration
 - `clean.py` → `clean.png`: removes the English labels, leader lines and dots
+- `kroppen/skin.py` → `skin.png` (body parts only): repaints the figure as plain skin, without
+  the organs, bones and vessels of the original, keeping the same pose so the label anchors still fit
 - `poster.html`: label data (`window.POSTER`) for the shared template in `anatomi/shared/`
 
 Re-render one poster (add `?grid` to the HTML path for a coordinate overlay; layout
