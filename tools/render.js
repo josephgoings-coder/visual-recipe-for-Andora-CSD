@@ -19,6 +19,9 @@ const { chromium } = require('playwright');
     deviceScaleFactor: Number(scaleArg) || 2,
   });
   page.on('pageerror', (err) => console.error('page error:', err.message));
+  page.on('console', (msg) => {
+    if (msg.type() === 'warning' || msg.type() === 'error') console.error(`${msg.type()}: ${msg.text()}`);
+  });
   await page.goto('file://' + path.resolve(input));
   // The page sizes its timer pills and draws the flow arrows once fonts load.
   await page.waitForFunction(() => window.__posterReady === true, null, { timeout: 15000 });

@@ -1,0 +1,98 @@
+/* Shared styling for the four Swedish anatomy posters.
+   Every poster is exactly 1080 x 1800 CSS px (3:5). Do not edit per poster:
+   per-poster settings live in each poster.html's window.POSTER object. */
+
+@font-face { font-family: 'Fredoka'; font-weight: 500; src: url('../../assets/fonts/fredoka-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fredoka'; font-weight: 600; src: url('../../assets/fonts/fredoka-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fredoka'; font-weight: 700; src: url('../../assets/fonts/fredoka-latin-700-normal.woff2') format('woff2'); }
+
+:root {
+  --ink: #1f2933;
+  --muted: #6b7480;
+  --rule: #e6e1d8;
+  --en: #2f6db5;   /* en-ord  (common gender) */
+  --ett: #d9732b;  /* ett-ord (neuter gender) */
+  --line: #2b2f33;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #ffffff; }
+body { font-family: 'Fredoka', sans-serif; color: var(--ink); }
+
+.poster {
+  position: relative;
+  width: 1080px;
+  height: 1800px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* ---------- header: 0-200px ---------- */
+.header {
+  position: absolute; left: 0; top: 0; width: 1080px; height: 200px;
+  padding: 44px 56px 0;
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.kicker {
+  display: inline-block;
+  font-weight: 600; font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted);
+}
+.title { font-weight: 700; font-size: 66px; line-height: 1.05; margin-top: 6px; }
+.subtitle { font-weight: 500; font-size: 26px; color: var(--muted); margin-top: 6px; }
+
+.legend { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+.legend .chip {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 500; font-size: 22px; color: var(--muted);
+}
+.legend .chip b {
+  display: inline-block; min-width: 64px; text-align: center;
+  padding: 4px 14px; border-radius: 999px;
+  font-weight: 600; font-size: 24px; color: #fff;
+}
+.legend .chip.en b  { background: var(--en); }
+.legend .chip.ett b { background: var(--ett); }
+
+.header::after {
+  content: ''; position: absolute; left: 56px; right: 56px; bottom: 0;
+  height: 3px; border-radius: 3px; background: var(--rule);
+}
+
+/* ---------- figure: 200-1700px ---------- */
+.figure { position: absolute; left: 0; top: 200px; width: 1080px; height: 1500px; }
+.figure .crop { position: absolute; overflow: hidden; }
+.figure .crop img { position: absolute; display: block; }
+.figure svg.leaders { position: absolute; left: 0; top: 0; width: 1080px; height: 1500px; overflow: visible; }
+.figure svg.leaders line { stroke: var(--line); stroke-width: 2.2; stroke-linecap: round; }
+.figure svg.leaders circle { fill: var(--line); stroke: #fff; stroke-width: 2; }
+
+.label {
+  position: absolute; white-space: nowrap;
+  font-size: 31px; line-height: 1; font-weight: 600;
+  padding: 4px 2px;
+  text-shadow: 0 0 4px #fff, 0 0 4px #fff, 0 0 6px #fff;
+}
+.label .art { font-weight: 500; margin-right: 0.28em; }
+.label.en  .art { color: var(--en); }
+.label.ett .art { color: var(--ett); }
+
+/* ---------- footer: 1700-1800px ---------- */
+.footer {
+  position: absolute; left: 0; top: 1700px; width: 1080px; height: 100px;
+  padding: 0 56px; display: flex; align-items: center; justify-content: space-between;
+  font-size: 23px; font-weight: 500; color: var(--muted);
+}
+.footer::before {
+  content: ''; position: absolute; left: 56px; right: 56px; top: 0;
+  height: 3px; border-radius: 3px; background: var(--rule);
+}
+.footer .note b { color: var(--ink); font-weight: 600; }
+.footer .note b.en { color: var(--en); }
+.footer .note b.ett { color: var(--ett); }
+.footer .series { font-weight: 600; letter-spacing: 0.04em; white-space: nowrap; }
+
+/* ---------- debug grid (open poster.html?grid) ---------- */
+.grid { position: absolute; inset: 0; pointer-events: none; }
+.grid line { stroke: rgba(0, 120, 255, 0.25); stroke-width: 1; }
+.grid text { font: 600 12px sans-serif; fill: rgba(0, 90, 200, 0.9); }
