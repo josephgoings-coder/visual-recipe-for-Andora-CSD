@@ -36,3 +36,29 @@ pixel scale (default `2`).
 ## Fonts
 
 Fredoka and Patrick Hand, bundled in `assets/fonts/` under the SIL Open Font License 1.1.
+
+## Människokroppen (Swedish anatomy posters)
+
+Four language-learning posters labelling human anatomy in Swedish. Each label shows the
+indefinite singular with its article, colour-coded by gender (**en** blue, **ett** orange).
+All four are 3:5 (2160 × 3600 px).
+
+| Poster | File |
+| --- | --- |
+| 1/4 Kroppens delar (body parts) | `anatomi/png/1-kroppens-delar.png` |
+| 2/4 Inre organ (internal organs) | `anatomi/png/2-inre-organ.png` |
+| 3/4 Muskler (muscles) | `anatomi/png/3-muskler.png` |
+| 4/4 Skelettet (skeleton) | `anatomi/png/4-skelettet.png` |
+
+Sources per category in `anatomi/<kroppen|organ|muskler|skelett>/`:
+
+- `source.png`: the original English-labelled illustration
+- `clean.py` → `clean.png`: removes the English labels, leader lines and dots
+- `poster.html`: label data (`window.POSTER`) for the shared template in `anatomi/shared/`
+
+Re-render one poster (add `?grid` to the HTML path for a coordinate overlay; layout
+problems are printed as warnings):
+
+```sh
+node tools/render.js anatomi/organ/poster.html anatomi/png/2-inre-organ.png 2
+```

@@ -2,9 +2,9 @@
 """Remove the English labels, coloured leader lines and endpoint dots from source.png -> clean.png.
 
 All leader lines in this illustration are horizontal, drawn as a coloured core (~4 px) with a white
-halo (total ~10-11 px), ending in a coloured dot with a white ring (outer radius ~7 px). Positions
-below were measured from the image (colour-distance runs + zoomed crops, see README of the poster
-work), not guessed.
+halo (total ~10-11 px), ending in a coloured dot with a white ring (outer radius ~8-9 px). Positions
+below were measured from the image (colour-distance runs along each line + zoomed, gridded crops),
+not guessed.
 
 Filling strategy
 - Text (always in the near-white margin): colour/darkness mask, dilated, then cv2.inpaint (TELEA).
@@ -12,7 +12,8 @@ Filling strategy
   just above and below the band, following the local structure direction so slanted organ outlines
   continue straight through (see fill_band). Because the lines are horizontal this keeps the organ
   texture (lung vessels, liver sheen, intestine folds) instead of the smooth smear that cv2.inpaint
-  leaves on a 13-px band.
+  leaves on a 17-px band. The small-intestine dot (tightly curved folds) is re-done with TELEA.
+- Finally the near-white background connected to the image border is set to pure white.
 """
 import os
 import cv2
