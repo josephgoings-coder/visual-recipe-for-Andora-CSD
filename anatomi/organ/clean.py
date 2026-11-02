@@ -154,6 +154,16 @@ for name, col, (dx, dy), ly, (tx0, ty0, tx1, ty1), side in LEADERS:
 # text in the margin: inpaint (background there is near-white with a faint tint)
 img = cv2.inpaint(img, text_mask & ~band_mask, 5, cv2.INPAINT_TELEA)
 
+# pure-white background (consistency with the other posters): near-white pixels (all channels
+# >= 246) connected to the image border become (255, 255, 255); a 1.5 px feather avoids a hard step.
+near = (img.min(2) >= 246).astype(np.uint8)
+n, lab = cv2.connectedComponents(near, connectivity=4)
+border_labels = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+bgm = np.isin(lab, list(border_labels)).astype(np.float32)
+bgm = cv2.GaussianBlur(bgm, (0, 0), 1.5) * bgm.max()
+bgm = np.maximum(bgm, (np.isin(lab, list(border_labels))).astype(np.float32))
+img = np.clip(img * (1 - bgm[..., None]) + 255 * bgm[..., None], 0, 255).astype(np.uint8)
+
 cv2.imwrite(os.path.join(HERE, 'clean.png'), img)
 if os.environ.get('MASK_OUT'):  # optional debug output of the mask
     cv2.imwrite(os.environ['MASK_OUT'], text_mask | band_mask)
